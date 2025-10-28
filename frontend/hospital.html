@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Trinity-trust : Blood donation management system</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f44336, #d32f2f);
+      color: #fff;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    section {
+      background: #fff;
+      color: #333;
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    header em {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #b71c1c;
+      display: block;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    form h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #b71c1c;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      margin-top: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #b71c1c;
+      outline: none;
+      box-shadow: 0 0 6px #f44336aa;
+    }
+
+    button,
+    input[type="reset"] {
+      padding: 12px 25px;
+      margin-top: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #d32f2f;
+      color: #fff;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    .feedback {
+      display: none;
+      background-color: #dff0d8;
+      border: 1px solid #3c763d;
+      color: #3c763d;
+      padding: 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <header>
+      <em>Trinity-trust Blood Donation</em>
+    </header>
+
+    <form id="hospitalForm" method="POST" action="http://localhost:8000/submitHospital">
+      <h2>Hospital Information</h2>
+
+      <label for="hospitalId">ID : </label>
+      <input name="hospitalId" type="text" required>
+
+      <label for="hospitalName">Name : </label>
+      <input name="hospitalName" type="text" required>
+
+      <label for="hospitalLocation">Location : </label>
+      <input name="hospitalLocation" type="text" required>
+
+      <label for="requirement">Blood requirement : </label>
+      <input name="requirement" type="number" required>
+
+      <label for="noOfPatients">No. of Patients : </label>
+      <input name="noOfPatients" type="number" required>
+
+      <label for="bankId">Bank ID : </label>
+      <input name="bankId" type="number" required>
+
+      <div style="margin-top: 25px;">
+        <button type="button" onclick="window.location.href='DBMS project.html'">Back</button>&nbsp;&nbsp;
+        <input type="reset" value="Clear" onclick="clearFeedback()">&nbsp;&nbsp;
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+
+    <div id="feedback" class="feedback">
+      Thank you 😊!<br>For registering your hospital with our
+      <b>Blood Donation Management System</b>.<br>Your hospital details have been successfully submitted.
+    </div>
+  </section>
+
+  <script>
+    function clearFeedback() {
+      document.getElementById('feedback').style.display = 'none';
+    }
+
+    const form = document.getElementById('hospitalForm');
+    form.addEventListener('submit', function (e) {
+      const requiredFields = form.querySelectorAll('input[required]');
+      let allFilled = true;
+
+      requiredFields.forEach(input => {
+        if (!input.value.trim()) {
+          allFilled = false;
+        }
+      });
+
+      if (!allFilled) {
+        e.preventDefault();
+        alert("Please fill in all the fields before submitting.");
+      } else {
+        // Feedback can be shown optionally after server responds
+        document.getElementById('feedback').style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

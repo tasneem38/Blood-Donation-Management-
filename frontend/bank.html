@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Blood Bank Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f44336, #d32f2f);
+      color: white;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    section {
+      background: #fff;
+      color: #000;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      max-width: 800px;
+      width: 100%;
+    }
+
+    h2 {
+      color: #b71c1c;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #d32f2f;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h2>Live Blood Bank Records</h2>
+    <table id="bankTable">
+      <thead>
+        <tr>
+          <th>Bank ID</th>
+          <th>Location</th>
+          <th>Availability (Ltrs)</th>
+          <th>Donor ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamic rows will be inserted here -->
+      </tbody>
+    </table>
+  </section>
+
+  <script>
+    // Hardcoded sample data matching your insert statements
+    const bloodBankData = [
+      { bank_id: 91735, location: "BELGIUM", availability: 56, donor_id: 1638 },
+      { bank_id: 17395, location: "BELURU", availability: 48, donor_id: 5678 },
+      { bank_id: 53179, location: "BALLARI", availability: 50, donor_id: 2574 },
+    ];
+
+    const tableBody = document.querySelector("#bankTable tbody");
+
+    bloodBankData.forEach(bank => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${bank.bank_id}</td>
+        <td>${bank.location}</td>
+        <td>${bank.availability}</td>
+        <td>${bank.donor_id}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
